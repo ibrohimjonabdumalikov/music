@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LyricTranslate</title>
+<title>LyricTranslate — Qo'shiq Tarjimoni</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet">
 <style>
@@ -23,15 +23,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(11,11,18,.85);backdrop-fil
 .nav-logo-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:16px;color:white}
 .nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;background:linear-gradient(135deg,var(--purple-light),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-badge{font-size:10px;background:rgba(124,111,224,.15);color:var(--purple-light);padding:3px 8px;border-radius:100px;border:.5px solid rgba(124,111,224,.3)}
-.hero{position:relative;z-index:1;text-align:center;padding:5rem 2rem 3rem;max-width:680px;margin:0 auto}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);background:var(--surface);border:.5px solid var(--border2);padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
+.hero{position:relative;z-index:1;text-align:center;padding:4rem 2rem 2.5rem;max-width:680px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);background:var(--surface);border:.5px solid var(--border2);padding:5px 14px;border-radius:100px;margin-bottom:1.2rem}
 .hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:#2ECC71;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(30px,6vw,50px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:1rem}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:.8rem}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--purple-light),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:15px;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto 2rem}
-.hero-stats{display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
-.stat-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:700}
+.hero p{font-size:14px;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto 1.5rem}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+.stat-num{font-family:'Syne',sans-serif;font-size:20px;font-weight:700}
 .stat-label{font-size:11px;color:var(--muted);margin-top:2px;text-align:center}
 .container{max-width:720px;margin:0 auto;padding:0 1.5rem 6rem;position:relative;z-index:1}
 .tabs-wrap{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:6px;display:flex;gap:4px;margin-bottom:1.5rem}
@@ -43,7 +43,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(11,11,18,.85);backdrop-fil
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .card{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
 .card-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:.75rem}
-.search-row{display:flex;gap:8px;margin-bottom:1rem}
+.search-row{display:flex;gap:8px;margin-bottom:.5rem}
 .search-field{flex:1;position:relative}
 .search-field input{width:100%;background:var(--surface2);border:.5px solid var(--border2);border-radius:12px;padding:13px 16px 13px 44px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .2s}
 .search-field input::placeholder{color:var(--muted)}
@@ -52,6 +52,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(11,11,18,.85);backdrop-fil
 .btn-search{background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:12px;padding:0 20px;font-size:13px;font-weight:600;color:white;cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:opacity .2s;height:48px}
 .btn-search:hover{opacity:.9}
 .btn-search:disabled{background:var(--surface3);color:var(--muted);cursor:not-allowed}
+.hint{font-size:12px;color:var(--muted);margin-bottom:.75rem;display:flex;align-items:center;gap:5px}
 .song-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto;margin-bottom:1rem}
 .song-list::-webkit-scrollbar{width:3px}
 .song-list::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
@@ -82,6 +83,9 @@ select:focus{outline:none;border-color:var(--purple)}
 .btn-main{width:100%;padding:14px;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Syne',sans-serif}
 .btn-main:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,111,224,.25)}
 .btn-main:disabled{background:var(--surface3);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{width:100%;padding:12px;font-size:14px;font-weight:600;background:transparent;color:var(--purple-light);border:1px solid rgba(124,111,224,.4);border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Syne',sans-serif;margin-bottom:.75rem}
+.btn-secondary:hover{background:rgba(124,111,224,.1);border-color:var(--purple)}
+.btn-secondary:disabled{opacity:.4;cursor:not-allowed}
 .loading-row{display:none;align-items:center;gap:10px;padding:.75rem 0;color:var(--muted);font-size:13px}
 .loading-row.show{display:flex}
 .dots{display:flex;gap:4px}
@@ -99,7 +103,7 @@ select:focus{outline:none;border-color:var(--purple)}
 .copy-btn{background:var(--surface2);border:.5px solid var(--border2);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;transition:all .2s}
 .copy-btn:hover{color:var(--text);border-color:var(--purple)}
 .result-text{font-size:13px;line-height:2;color:var(--text);white-space:pre-wrap}
-.video-drop{border:1.5px dashed var(--border2);border-radius:16px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;margin-bottom:1rem}
+.video-drop{border:1.5px dashed var(--border2);border-radius:16px;padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;margin-bottom:1rem}
 .video-drop:hover,.video-drop.drag{border-color:var(--purple);background:rgba(124,111,224,.04)}
 .video-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .drop-icon{font-size:40px;color:var(--purple);margin-bottom:10px;display:block}
@@ -108,26 +112,26 @@ select:focus{outline:none;border-color:var(--purple)}
 .drop-formats{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
 .fmt{background:var(--surface2);border:.5px solid var(--border);border-radius:6px;padding:3px 8px;font-size:11px;color:var(--muted)}
 #video-el{width:100%;border-radius:12px;margin-bottom:1rem;max-height:220px;display:none}
-.info-box{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
-.info-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:.5rem}
-.info-text{font-size:12px;color:var(--muted);line-height:1.7}
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--purple);color:white;font-size:10px;font-weight:700;margin-right:6px;flex-shrink:0}
+.step-row{display:flex;align-items:center;font-size:12px;color:var(--muted);margin-bottom:.5rem}
 footer{position:relative;z-index:1;border-top:.5px solid var(--border);padding:2rem;text-align:center;font-size:12px;color:var(--muted)}
 footer em{color:var(--purple-light);font-style:normal}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--faint);border-radius:4px}
 @media(max-width:600px){nav{padding:0 1rem}.hero{padding:3rem 1rem 2rem}.container{padding:0 1rem 4rem}.lang-row{grid-template-columns:1fr 34px 1fr;gap:5px}}
 </style>
+</head>
 <body>
 <nav>
   <a class="nav-logo" href="#"><div class="nav-logo-icon"><i class="ti ti-music"></i></div><span class="nav-logo-text">LyricTranslate</span></a>
   <span class="nav-badge">AI powered</span>
 </nav>
 <div class="hero">
-  <div class="hero-eyebrow"><span></span> Jonli ishlaydi</div>
+  <div class="hero-eyebrow"><span></span> AI bilan jonli ishlaydi</div>
   <h1>Qo'shiqlar <em>tarjimoni</em></h1>
-  <p>Qo'shiq nomi yozing, matnini yuklab oling va 12+ tilga AI bilan tarjima qiling</p>
+  <p>Qo'shiq nomini yozing — AI o'zi lyrics topadi. Video yuklang — AI o'zi matnini o'qiydi va tarjima qiladi.</p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Til</div></div>
-    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Powered</div></div>
+    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Auto-Read</div></div>
     <div class="stat"><div class="stat-num">&#8734;</div><div class="stat-label">Qo'shiqlar</div></div>
   </div>
 </div>
@@ -135,30 +139,34 @@ footer em{color:var(--purple-light);font-style:normal}
   <div class="tabs-wrap">
     <button class="tab active" onclick="switchTab('search')"><i class="ti ti-search"></i> Qo'shiq qidir</button>
     <button class="tab" onclick="switchTab('manual')"><i class="ti ti-text-size"></i> Matn kiriting</button>
-    <button class="tab" onclick="switchTab('video')"><i class="ti ti-video"></i> Video tarjima</button>
+    <button class="tab" onclick="switchTab('video')"><i class="ti ti-video"></i> Video / Audio</button>
   </div>
+
+  <!-- SEARCH PANEL -->
   <div class="panel active" id="panel-search">
     <div class="card">
-      <div class="card-label"><i class="ti ti-music"></i> Qo'shiq nomi</div>
+      <div class="card-label"><i class="ti ti-music"></i> Qo'shiq nomi yozing — AI lyrics topadi</div>
       <div class="search-row">
         <div class="search-field">
           <i class="ti ti-search"></i>
-          <input type="text" id="song-input" placeholder="Masalan: Adele Hello, BTS Dynamite, Coldplay Yellow..." onkeydown="if(event.key==='Enter')searchSong()">
+          <input type="text" id="song-input" placeholder="Masalan: Adele Hello, BTS Dynamite, Tarkan Simarik..." onkeydown="if(event.key==='Enter')searchSong()">
         </div>
-        <button class="btn-search" id="btn-search" onclick="searchSong()"><i class="ti ti-search"></i> Qidir</button>
+        <button class="btn-search" id="btn-search" onclick="searchSong()"><i class="ti ti-sparkles"></i> Qidir</button>
       </div>
-      <div class="loading-row" id="search-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Qidirilmoqda...</div>
+      <div class="hint"><i class="ti ti-info-circle"></i> AI istalgan qo'shiqni topib, matnini avtomatik chiqaradi</div>
+      <div class="loading-row" id="search-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;AI qo'shiq matnini qidiryapti...</div>
       <div class="err-box" id="search-err"></div>
-      <div class="song-list" id="song-list" style="display:none"></div>
+      <div id="search-results" style="display:none"></div>
     </div>
+
     <div id="selected-area" style="display:none">
       <div class="selected-banner">
-        <div class="song-emoji" id="sel-emoji"></div>
+        <div class="song-emoji" id="sel-emoji">🎵</div>
         <div class="info"><div class="sname" id="sel-name"></div><div class="sartist" id="sel-artist"></div></div>
         <button class="clear-btn" onclick="clearSelection()"><i class="ti ti-x"></i></button>
       </div>
       <div class="card">
-        <div class="card-label"><i class="ti ti-file-text"></i> Qo'shiq matni</div>
+        <div class="card-label"><i class="ti ti-file-text"></i> Qo'shiq matni (AI tomonidan topildi)</div>
         <div class="lyrics-box" id="search-lyrics"></div>
       </div>
       <div class="lang-row">
@@ -176,39 +184,20 @@ footer em{color:var(--purple-light);font-style:normal}
       <div class="result-wrap" id="s-result"></div>
     </div>
   </div>
+
+  <!-- MANUAL PANEL -->
   <div class="panel" id="panel-manual">
     <div class="card">
-      <div class="card-label"><i class="ti ti-text-size"></i> Qo'shiq matni</div>
+      <div class="card-label"><i class="ti ti-text-size"></i> Qo'shiq matnini kiriting</div>
       <textarea class="lyrics-box" id="manual-text" placeholder="Bu yerga qo'shiq so'zlarini yozing...&#10;&#10;Masalan:&#10;Hello, it's me&#10;I was wondering if after all these years..."></textarea>
     </div>
     <div class="lang-row">
       <div class="lang-group"><label>Asl til</label>
-        <select id="m-from">
-          <option value="auto" selected>Avtomatik</option>
-          <option value="English">Inglizcha</option>
-          <option value="Russian">Ruscha</option>
-          <option value="Korean">Koreyscha</option>
-          <option value="Spanish">Ispancha</option>
-          <option value="French">Fransuzcha</option>
-          <option value="Arabic">Arabcha</option>
-          <option value="Turkish">Turkcha</option>
-          <option value="Japanese">Yaponcha</option>
-          <option value="Uzbek">O'zbekcha</option>
-        </select>
+        <select id="m-from"><option value="auto" selected>Avtomatik</option><option value="English">Inglizcha</option><option value="Russian">Ruscha</option><option value="Korean">Koreyscha</option><option value="Spanish">Ispancha</option><option value="French">Fransuzcha</option><option value="Arabic">Arabcha</option><option value="Turkish">Turkcha</option><option value="Japanese">Yaponcha</option><option value="Uzbek">O'zbekcha</option></select>
       </div>
       <button class="swap-btn" onclick="swapLangs('m-from','m-to')"><i class="ti ti-switch-horizontal"></i></button>
       <div class="lang-group"><label>Tarjima tili</label>
-        <select id="m-to">
-          <option value="Uzbek" selected>O'zbekcha</option>
-          <option value="Russian">Ruscha</option>
-          <option value="English">Inglizcha</option>
-          <option value="Korean">Koreyscha</option>
-          <option value="Spanish">Ispancha</option>
-          <option value="French">Fransuzcha</option>
-          <option value="Arabic">Arabcha</option>
-          <option value="Turkish">Turkcha</option>
-          <option value="Japanese">Yaponcha</option>
-        </select>
+        <select id="m-to"><option value="Uzbek" selected>O'zbekcha</option><option value="Russian">Ruscha</option><option value="English">Inglizcha</option><option value="Korean">Koreyscha</option><option value="Spanish">Ispancha</option><option value="French">Fransuzcha</option><option value="Arabic">Arabcha</option><option value="Turkish">Turkcha</option><option value="Japanese">Yaponcha</option></select>
       </div>
     </div>
     <button class="btn-main" id="m-btn" onclick="doTranslate('m')"><i class="ti ti-language"></i> Tarjima qilish</button>
@@ -217,7 +206,14 @@ footer em{color:var(--purple-light);font-style:normal}
     <div class="result-wrap" id="m-result"></div>
   </div>
 
+  <!-- VIDEO PANEL -->
   <div class="panel" id="panel-video">
+    <div class="card">
+      <div class="card-label"><i class="ti ti-info-circle"></i> Qanday ishlaydi</div>
+      <div class="step-row"><span class="step-badge">1</span> Video yoki audio faylni yuklang</div>
+      <div class="step-row"><span class="step-badge">2</span> AI avtomatik qo'shiq nomini aniqlaydi</div>
+      <div class="step-row"><span class="step-badge">3</span> AI lyrics topib tarjima qiladi</div>
+    </div>
     <div class="video-drop" id="video-drop"
       ondragover="event.preventDefault();this.classList.add('drag')"
       ondragleave="this.classList.remove('drag')"
@@ -226,206 +222,210 @@ footer em{color:var(--purple-light);font-style:normal}
       <i class="ti ti-cloud-upload drop-icon"></i>
       <div class="drop-title">Video yoki audio yuklang</div>
       <div class="drop-sub">Bosing yoki faylni bu yerga torting</div>
-      <div class="drop-formats">
-        <span class="fmt">MP4</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MP3</span><span class="fmt">WAV</span>
-      </div>
+      <div class="drop-formats"><span class="fmt">MP4</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MP3</span><span class="fmt">WAV</span></div>
     </div>
     <video id="video-el" controls></video>
     <div id="video-area" style="display:none">
-      <div class="card">
-        <div class="card-label"><i class="ti ti-file-text"></i> Matn (qo'lda ham kiritsa bo'ladi)</div>
-        <textarea class="lyrics-box" id="video-text" placeholder="Video yuklanganidan so'ng matnni shu yerga yozing yoki qo'lda kiriting..."></textarea>
+      <div class="loading-row" id="v-detect-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;AI qo'shiq nomini aniqlamoqda...</div>
+      <div class="card" id="v-song-card" style="display:none">
+        <div class="card-label"><i class="ti ti-music"></i> Aniqlangan qo'shiq</div>
+        <div id="v-song-info" style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">
+          <div class="song-emoji" id="v-emoji">🎵</div>
+          <div><div class="sname" id="v-song-name"></div><div class="sartist" id="v-song-artist"></div></div>
+        </div>
+        <div class="card-label"><i class="ti ti-file-text"></i> Qo'shiq matni (AI topdi)</div>
+        <div class="lyrics-box" id="v-lyrics"></div>
       </div>
-      <div class="lang-row">
+      <div id="v-manual-card" style="display:none">
+        <div class="card">
+          <div class="card-label"><i class="ti ti-pencil"></i> Qo'shiq nomini kiriting (AI aniqlay olmadi)</div>
+          <div class="search-row">
+            <div class="search-field">
+              <i class="ti ti-music"></i>
+              <input type="text" id="v-manual-input" placeholder="Qo'shiq nomi va artist..." onkeydown="if(event.key==='Enter')searchFromVideo()">
+            </div>
+            <button class="btn-search" onclick="searchFromVideo()"><i class="ti ti-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="lang-row" id="v-lang-row" style="display:none">
         <div class="lang-group"><label>Asl til</label>
-          <select id="v-from">
-            <option value="auto" selected>Avtomatik</option>
-            <option value="English">Inglizcha</option>
-            <option value="Russian">Ruscha</option>
-            <option value="Korean">Koreyscha</option>
-            <option value="Turkish">Turkcha</option>
-            <option value="Uzbek">O'zbekcha</option>
-          </select>
+          <select id="v-from"><option value="auto" selected>Avtomatik</option><option value="English">Inglizcha</option><option value="Russian">Ruscha</option><option value="Korean">Koreyscha</option><option value="Turkish">Turkcha</option><option value="Uzbek">O'zbekcha</option></select>
         </div>
         <button class="swap-btn" onclick="swapLangs('v-from','v-to')"><i class="ti ti-switch-horizontal"></i></button>
         <div class="lang-group"><label>Tarjima tili</label>
-          <select id="v-to">
-            <option value="Uzbek" selected>O'zbekcha</option>
-            <option value="Russian">Ruscha</option>
-            <option value="English">Inglizcha</option>
-            <option value="Korean">Koreyscha</option>
-            <option value="Turkish">Turkcha</option>
-          </select>
+          <select id="v-to"><option value="Uzbek" selected>O'zbekcha</option><option value="Russian">Ruscha</option><option value="English">Inglizcha</option><option value="Korean">Koreyscha</option><option value="Turkish">Turkcha</option></select>
         </div>
       </div>
-      <button class="btn-main" id="v-btn" onclick="doTranslate('v')"><i class="ti ti-language"></i> Tarjima qilish</button>
+      <button class="btn-main" id="v-btn" onclick="doTranslate('v')" style="display:none"><i class="ti ti-language"></i> Tarjima qilish</button>
       <div class="loading-row" id="v-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Tarjima qilinmoqda...</div>
       <div class="err-box" id="v-err"></div>
       <div class="result-wrap" id="v-result"></div>
-    </div>
-    <div class="info-box">
-      <div class="info-title"><i class="ti ti-info-circle"></i> Eslatma</div>
-      <div class="info-text">Video yoki audio faylni yuklang, matnni qo'lda kiriting va istalgan tilga AI tarjima qiladi. She'riy ohang saqlanadi.</div>
     </div>
   </div>
 </div>
 <footer>Tayyorladi <em>LyricTranslate</em> &middot; Anthropic Claude AI bilan ishlaydi</footer>
 <script>
-const SONGS = [
-  { id:1, title:"Hello", artist:"Adele", emoji:"🎤",
-    lyrics:"Hello, it's me\nI was wondering if after all these years you'd like to meet\nTo go over everything\nThey say that time's supposed to heal ya\nBut I ain't done much healing\n\nHello, can you hear me?\nI'm in California dreaming about who we used to be\nWhen we were younger and free\nI've forgotten how it felt before the world fell at our feet\n\nThere's such a difference between us\nAnd a million miles\n\nHello from the other side\nI must have called a thousand times\nTo tell you I'm sorry for everything that I've done\nBut when I call you never seem to be home" },
-  { id:2, title:"Dynamite", artist:"BTS", emoji:"💜",
-    lyrics:"Cause I, I, I'm in the stars tonight\nSo watch me bring the fire and set the night alight\nShining through the city with a little funk and soul\nSo I'ma light it up like dynamite\n\nDyno-mite, mite, mite\nDyno-mite, mite, mite\nDyno, dyno-mite, mite, mite\nDyno-mite, mite, mite\n\nI'm diamond, you know I glow up\nHey, so let's go" },
-  { id:3, title:"Yellow", artist:"Coldplay", emoji:"🌟",
-    lyrics:"Look at the stars\nLook how they shine for you\nAnd everything you do\nYeah, they were all yellow\n\nI came along\nI wrote a song for you\nAnd all the things you do\nAnd it was called Yellow\n\nSo then I took my turn\nOh, what a thing to have done\nAnd it was all yellow" },
-  { id:4, title:"Shape of You", artist:"Ed Sheeran", emoji:"🎸",
-    lyrics:"The club isn't the best place to find a lover\nSo the bar is where I go\nMe and my friends at the table doing shots\nDrinking fast and then we talk slow\n\nCome over and start up a conversation with just me\nAnd trust me I'll give it a chance now\nTake my hand, stop, put Van the Man on the jukebox\nAnd then we start to dance\n\nI'm in love with the shape of you\nWe push and pull like a magnet do" },
-  { id:5, title:"Blinding Lights", artist:"The Weeknd", emoji:"🌃",
-    lyrics:"I've been trying to call\nI've been on my own for long enough\nMaybe you can show me how to love, maybe\n\nI'm going through withdrawals\nYou don't even have to do too much\nYou can turn me on with just a touch, baby\n\nI look around and sin city's cold and empty\nNo one's around to judge me\nI can't see clearly when you're gone\n\nI said, ooh, I'm blinded by the lights\nNo, I can't sleep until I feel your touch" },
-  { id:6, title:"Payphone", artist:"Maroon 5", emoji:"📞",
-    lyrics:"I'm at a payphone trying to call home\nAll of my change I spent on you\nWhere have the times gone, baby it's all wrong\nWhere are the plans we made for two?\n\nYeah, I, I know it's hard to remember\nThe people we used to be\nIt's even harder to picture\nThat you're not here next to me" }
-];
-let currentSong = null;
-
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    t.classList.toggle('active', ['search','manual','video'][i] === name);
-  });
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['search','manual','video'][i]===name));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
 }
 
-function searchSong() {
-  const q = document.getElementById('song-input').value.trim().toLowerCase();
-  const listEl = document.getElementById('song-list');
-  const errEl = document.getElementById('search-err');
-  const loadEl = document.getElementById('search-loading');
-  const btn = document.getElementById('btn-search');
-  if (!q) { showErr(errEl, "Iltimos, qo'shiq nomini kiriting."); return; }
-  errEl.classList.remove('show');
-  listEl.style.display = 'none';
-  listEl.innerHTML = '';
-  loadEl.classList.add('show');
-  btn.disabled = true;
-  setTimeout(() => {
-    loadEl.classList.remove('show');
-    btn.disabled = false;
-    const results = SONGS.filter(s =>
-      s.title.toLowerCase().includes(q) ||
-      s.artist.toLowerCase().includes(q)
-    );
-    if (results.length === 0) {
-      showErr(errEl, "Qo'shiq topilmadi. Boshqa nom yoki artist kiriting.");
-      return;
-    }
-    results.forEach(song => {
-      const div = document.createElement('div');
-      div.className = 'song-item';
-      div.innerHTML = `
-        <div class="song-emoji">${song.emoji}</div>
-        <div class="song-meta">
-          <div class="song-name">${song.title}</div>
-          <div class="song-artist">${song.artist}</div>
-        </div>
-        <div class="song-pick"><i class="ti ti-chevron-right"></i> Tanlash</div>
-      `;
-      div.onclick = () => selectSong(song);
-      listEl.appendChild(div);
-    });
-    listEl.style.display = 'flex';
-  }, 800);
+function swapLangs(a,b){
+  const ea=document.getElementById(a),eb=document.getElementById(b),t=ea.value;
+  ea.value=eb.value;eb.value=t;
 }
 
-function selectSong(song) {
-  currentSong = song;
-  document.getElementById('song-list').style.display = 'none';
-  document.getElementById('sel-emoji').textContent = song.emoji;
-  document.getElementById('sel-name').textContent = song.title;
-  document.getElementById('sel-artist').textContent = song.artist;
-  document.getElementById('search-lyrics').textContent = song.lyrics;
-  document.getElementById('selected-area').style.display = 'block';
-  document.getElementById('s-result').classList.remove('show');
-  document.getElementById('s-result').innerHTML = '';
-}
+function showErr(id,msg){const e=document.getElementById(id);e.textContent=msg;e.classList.add('show');}
+function hideErr(id){document.getElementById(id).classList.remove('show');}
 
-function clearSelection() {
-  currentSong = null;
-  document.getElementById('selected-area').style.display = 'none';
-  document.getElementById('song-input').value = '';
-  document.getElementById('s-result').classList.remove('show');
-}
-
-function swapLangs(fromId, toId) {
-  const a = document.getElementById(fromId);
-  const b = document.getElementById(toId);
-  const tmp = a.value;
-  a.value = b.value;
-  b.value = tmp;
-}
-
-function showErr(el, msg) {
-  el.textContent = msg;
-  el.classList.add('show');
-}
-
-function showResult(wrapId, fromLang, toLang, text) {
-  const wrap = document.getElementById(wrapId);
-  wrap.innerHTML = `
-    <div class="result-card">
-      <div class="result-top">
-        <div class="result-langs">
-          <span class="lang-pill">${fromLang}</span>
-          <span style="color:var(--muted);font-size:13px">&#8594;</span>
-          <span class="lang-pill">${toLang}</span>
-        </div>
-        <button class="copy-btn" onclick="copyText(this, \`${text.replace(/`/g,'\\`')}\`)">
-          <i class="ti ti-copy"></i> Nusxa
-        </button>
+function showResult(wrapId,fromLang,toLang,text){
+  const w=document.getElementById(wrapId);
+  const escaped=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  w.innerHTML=`<div class="result-card">
+    <div class="result-top">
+      <div class="result-langs">
+        <span class="lang-pill">${fromLang}</span>
+        <span style="color:var(--muted);font-size:13px">&#8594;</span>
+        <span class="lang-pill">${toLang}</span>
       </div>
-      <div class="result-text">${text.replace(/</g,'&lt;')}</div>
-    </div>`;
-  wrap.classList.add('show');
+      <button class="copy-btn" onclick="copyText(this,${JSON.stringify(text)})"><i class="ti ti-copy"></i> Nusxa</button>
+    </div>
+    <div class="result-text">${escaped}</div>
+  </div>`;
+  w.classList.add('show');
 }
 
-function copyText(btn, text) {
-  navigator.clipboard.writeText(text).then(() => {
-    btn.innerHTML = '<i class="ti ti-check"></i> Nusxalandi!';
-    setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy"></i> Nusxa'; }, 2000);
+function copyText(btn,text){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.innerHTML='<i class="ti ti-check"></i> Nusxalandi!';
+    setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy"></i> Nusxa';},2000);
   });
 }
-async function doTranslate(prefix) {
-  const btn = document.getElementById(prefix + '-btn');
-  const loadEl = document.getElementById(prefix + '-loading');
-  const errEl = document.getElementById(prefix + '-err');
-  const resultId = prefix + '-result';
-  errEl.classList.remove('show');
 
-  let text = '';
-  let fromLang = '', toLang = '';
+async function callClaude(prompt, maxTokens=1500){
+  const res=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:maxTokens,
+      messages:[{role:"user",content:prompt}]
+    })
+  });
+  const data=await res.json();
+  if(data.error) throw new Error(data.error.message);
+  return data.content.map(b=>b.text||'').join('');
+}
 
-  if (prefix === 's') {
-    text = document.getElementById('search-lyrics').textContent.trim();
-    fromLang = document.getElementById('s-from').value;
-    toLang = document.getElementById('s-to').value;
-  } else if (prefix === 'm') {
-    text = document.getElementById('manual-text').value.trim();
-    fromLang = document.getElementById('m-from').value;
-    toLang = document.getElementById('m-to').value;
-  } else if (prefix === 'v') {
-    text = document.getElementById('video-text').value.trim();
-    fromLang = document.getElementById('v-from').value;
-    toLang = document.getElementById('v-to').value;
-  }
-
-  if (!text) { showErr(errEl, "Tarjima qilish uchun matn yo'q."); return; }
-  if (fromLang !== 'auto' && fromLang === toLang) { showErr(errEl, "Asl til va tarjima tili bir xil bo'lmasin."); return; }
-
-  btn.disabled = true;
+// ─── SEARCH: AI finds lyrics ─────────────────────────────────────
+async function searchSong(){
+  const q=document.getElementById('song-input').value.trim();
+  const loadEl=document.getElementById('search-loading');
+  const errEl=document.getElementById('search-err');
+  const resultsEl=document.getElementById('search-results');
+  const btn=document.getElementById('btn-search');
+  if(!q){showErr('search-err',"Iltimos, qo'shiq nomini kiriting.");return;}
+  hideErr('search-err');
+  resultsEl.style.display='none';
   loadEl.classList.add('show');
-  document.getElementById(resultId).classList.remove('show');
+  btn.disabled=true;
+  try{
+    const prompt=`Foydalanuvchi "${q}" deb yozdi. Bu qo'shiq nomi yoki artist bo'lishi mumkin.
 
-  const fromLabel = fromLang === 'auto' ? 'Avtomatik' : fromLang;
-  const prompt = `Sen professional qo'shiq matni tarjimonisan. Quyidagi matni ${fromLang === 'auto' ? 'asl tilini o\'zing aniqlab' : fromLang + ' tilidan'} ${toLang} tiliga tarjima qil.
+Agar bu qo'shiq ekanligini bilsang, quyidagi JSON formatda javob ber (boshqa hech narsa yozma):
+{
+  "found": true,
+  "title": "qo'shiq nomi",
+  "artist": "artist nomi",
+  "emoji": "mos emoji",
+  "lyrics": "qo'shiqning to'liq matni (inglizcha bo'lsa inglizcha, o'zbekcha bo'lsa o'zbekcha va h.k.)"
+}
+
+Agar bilmasang:
+{"found": false}
+
+Faqat JSON, boshqa hech narsa yozma.`;
+    const raw=await callClaude(prompt,2000);
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const data=JSON.parse(clean);
+    if(!data.found){
+      showErr('search-err',"Bu qo'shiq topilmadi. Boshqacha yozing (masalan: 'Adele Hello' yoki 'BTS Dynamite').");
+    } else {
+      showSongResult(data);
+    }
+  } catch(e){
+    showErr('search-err',"Xatolik: "+e.message);
+  } finally {
+    loadEl.classList.remove('show');
+    btn.disabled=false;
+  }
+}
+
+function showSongResult(song){
+  const resultsEl=document.getElementById('search-results');
+  resultsEl.innerHTML='';
+  const div=document.createElement('div');
+  div.className='song-item';
+  div.innerHTML=`
+    <div class="song-emoji">${song.emoji||'🎵'}</div>
+    <div class="song-meta">
+      <div class="song-name">${song.title}</div>
+      <div class="song-artist">${song.artist}</div>
+    </div>
+    <div class="song-pick"><i class="ti ti-chevron-right"></i> Tanlash</div>`;
+  div.onclick=()=>selectSong(song);
+  resultsEl.appendChild(div);
+  resultsEl.style.display='flex';
+  resultsEl.style.flexDirection='column';
+  resultsEl.style.gap='6px';
+}
+
+function selectSong(song){
+  document.getElementById('search-results').style.display='none';
+  document.getElementById('sel-emoji').textContent=song.emoji||'🎵';
+  document.getElementById('sel-name').textContent=song.title;
+  document.getElementById('sel-artist').textContent=song.artist;
+  document.getElementById('search-lyrics').textContent=song.lyrics;
+  document.getElementById('selected-area').style.display='block';
+  document.getElementById('s-result').classList.remove('show');
+  document.getElementById('s-result').innerHTML='';
+}
+
+function clearSelection(){
+  document.getElementById('selected-area').style.display='none';
+  document.getElementById('song-input').value='';
+  document.getElementById('search-results').style.display='none';
+}
+// ─── TRANSLATE ───────────────────────────────────────────────────
+async function doTranslate(prefix){
+  const btn=document.getElementById(prefix+'-btn');
+  const loadEl=document.getElementById(prefix+'-loading');
+  const errEl=document.getElementById(prefix+'-err');
+  hideErr(prefix+'-err');
+  let text='',fromLang='',toLang='';
+  if(prefix==='s'){
+    text=document.getElementById('search-lyrics').textContent.trim();
+    fromLang=document.getElementById('s-from').value;
+    toLang=document.getElementById('s-to').value;
+  } else if(prefix==='m'){
+    text=document.getElementById('manual-text').value.trim();
+    fromLang=document.getElementById('m-from').value;
+    toLang=document.getElementById('m-to').value;
+  } else if(prefix==='v'){
+    text=document.getElementById('v-lyrics').textContent.trim();
+    fromLang=document.getElementById('v-from').value;
+    toLang=document.getElementById('v-to').value;
+  }
+  if(!text){showErr(prefix+'-err',"Tarjima qilish uchun matn yo'q.");return;}
+  if(fromLang!=='auto'&&fromLang===toLang){showErr(prefix+'-err',"Asl til va tarjima tili bir xil bo'lmasin.");return;}
+  btn.disabled=true;
+  loadEl.classList.add('show');
+  document.getElementById(prefix+'-result').classList.remove('show');
+  const fromLabel=fromLang==='auto'?'Avtomatik':fromLang;
+  try{
+    const prompt=`Sen professional qo'shiq matni tarjimonisan. Quyidagi matni ${fromLang==='auto'?"asl tilini o'zing aniqlab":fromLang+" tilidan"} ${toLang} tiliga tarjima qil.
 
 Qoidalar:
 - Har bir qatorni alohida tarjima qil
@@ -434,51 +434,130 @@ Qoidalar:
 
 Matn:
 ${text}`;
-
-  try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
-    });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    const translated = data.content.map(b => b.text || '').join('');
-    showResult(resultId, fromLabel, toLang, translated);
-  } catch(e) {
-    showErr(errEl, "Xatolik yuz berdi: " + e.message);
+    const result=await callClaude(prompt,1500);
+    showResult(prefix+'-result',fromLabel,toLang,result);
+  } catch(e){
+    showErr(prefix+'-err',"Xatolik: "+e.message);
   } finally {
-    btn.disabled = false;
+    btn.disabled=false;
     loadEl.classList.remove('show');
   }
 }
 
-function handleFile(file) {
-  if (!file) return;
-  const videoEl = document.getElementById('video-el');
-  const area = document.getElementById('video-area');
-  const drop = document.getElementById('video-drop');
-  const url = URL.createObjectURL(file);
-  if (file.type.startsWith('video/')) {
-    videoEl.src = url;
-    videoEl.style.display = 'block';
+// ─── VIDEO: AI detects song from filename ────────────────────────
+function handleFile(file){
+  if(!file)return;
+  const videoEl=document.getElementById('video-el');
+  const area=document.getElementById('video-area');
+  const drop=document.getElementById('video-drop');
+  if(file.type.startsWith('video/')){
+    videoEl.src=URL.createObjectURL(file);
+    videoEl.style.display='block';
   } else {
-    videoEl.style.display = 'none';
+    videoEl.style.display='none';
   }
-  drop.style.display = 'none';
-  area.style.display = 'block';
-  document.getElementById('video-text').placeholder = "Video yuklandia! Qo'shiq matnini bu yerga yozing...";
+  drop.style.display='none';
+  area.style.display='block';
+  detectSongFromFile(file.name);
 }
 
-function handleDrop(e) {
+function handleDrop(e){
   e.preventDefault();
   document.getElementById('video-drop').classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if (file) handleFile(file);
+  const file=e.dataTransfer.files[0];
+  if(file)handleFile(file);
+}
+
+async function detectSongFromFile(filename){
+  const detectLoad=document.getElementById('v-detect-loading');
+  const songCard=document.getElementById('v-song-card');
+  const manualCard=document.getElementById('v-manual-card');
+  const langRow=document.getElementById('v-lang-row');
+  const vBtn=document.getElementById('v-btn');
+  detectLoad.classList.add('show');
+  songCard.style.display='none';
+  manualCard.style.display='none';
+  langRow.style.display='none';
+  vBtn.style.display='none';
+  try{
+    const prompt=`Fayl nomi: "${filename}"
+Bu fayl nomi asosida qanday qo'shiq ekanligini taxmin qil.
+
+Agar aniqlay olsang, quyidagi JSON formatda javob ber (boshqa hech narsa yozma):
+{
+  "found": true,
+  "title": "qo'shiq nomi",
+  "artist": "artist nomi",
+  "emoji": "mos emoji",
+  "lyrics": "qo'shiqning to'liq matni"
+}
+
+Agar aniqlay olmasang:
+{"found": false}
+
+Faqat JSON, boshqa hech narsa yozma.`;
+    const raw=await callClaude(prompt,2000);
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const data=JSON.parse(clean);
+    detectLoad.classList.remove('show');
+    if(data.found){
+      document.getElementById('v-emoji').textContent=data.emoji||'🎵';
+      document.getElementById('v-song-name').textContent=data.title;
+      document.getElementById('v-song-artist').textContent=data.artist;
+      document.getElementById('v-lyrics').textContent=data.lyrics;
+      songCard.style.display='block';
+      langRow.style.display='grid';
+      vBtn.style.display='flex';
+    } else {
+      manualCard.style.display='block';
+    }
+  } catch(e){
+    detectLoad.classList.remove('show');
+    document.getElementById('v-manual-card').style.display='block';
+  }
+}
+
+async function searchFromVideo(){
+  const q=document.getElementById('v-manual-input').value.trim();
+  if(!q)return;
+  const songCard=document.getElementById('v-song-card');
+  const langRow=document.getElementById('v-lang-row');
+  const vBtn=document.getElementById('v-btn');
+  const detectLoad=document.getElementById('v-detect-loading');
+  detectLoad.classList.add('show');
+  try{
+    const prompt=`"${q}" qo'shig'ining to'liq matnini ber.
+
+JSON formatda javob ber (boshqa hech narsa yozma):
+{
+  "found": true,
+  "title": "qo'shiq nomi",
+  "artist": "artist nomi",
+  "emoji": "mos emoji",
+  "lyrics": "qo'shiqning to'liq matni"
+}
+
+Agar bilmasang: {"found": false}`;
+    const raw=await callClaude(prompt,2000);
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const data=JSON.parse(clean);
+    detectLoad.classList.remove('show');
+    if(data.found){
+      document.getElementById('v-emoji').textContent=data.emoji||'🎵';
+      document.getElementById('v-song-name').textContent=data.title;
+      document.getElementById('v-song-artist').textContent=data.artist;
+      document.getElementById('v-lyrics').textContent=data.lyrics;
+      songCard.style.display='block';
+      langRow.style.display='grid';
+      vBtn.style.display='flex';
+      document.getElementById('v-manual-card').style.display='none';
+    } else {
+      showErr('v-err',"Bu qo'shiq topilmadi.");
+    }
+  } catch(e){
+    detectLoad.classList.remove('show');
+    showErr('v-err',"Xatolik: "+e.message);
+  }
 }
 </script>
 </body>
