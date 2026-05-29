@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LyricTranslate</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7C6FE0;--purple-dark:#5A4FC9;--purple-light:#A89BF0;
+  --pink:#D4537E;--pink-light:#E87DAD;
+  --bg:#0B0B12;--surface:#13131C;--surface2:#1A1A26;--surface3:#222232;
+  --border:#252538;--border2:#2E2E45;
+  --text:#F0EFF8;--muted:#7A7994;--faint:#2A2A3E;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(124,111,224,.08),transparent 70%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,83,126,.06),transparent 70%);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,11,18,.85);backdrop-filter:blur(20px);border-bottom:.5px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:16px;color:white}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;background:linear-gradient(135deg,var(--purple-light),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-badge{font-size:10px;background:rgba(124,111,224,.15);color:var(--purple-light);padding:3px 8px;border-radius:100px;border:.5px solid rgba(124,111,224,.3)}
+.hero{position:relative;z-index:1;text-align:center;padding:5rem 2rem 3rem;max-width:680px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);background:var(--surface);border:.5px solid var(--border2);padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:#2ECC71;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(30px,6vw,50px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:1rem}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--purple-light),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:15px;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto 2rem}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.stat-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:700}
+.stat-label{font-size:11px;color:var(--muted);margin-top:2px;text-align:center}
+.container{max-width:720px;margin:0 auto;padding:0 1.5rem 6rem;position:relative;z-index:1}
+.tabs-wrap{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:6px;display:flex;gap:4px;margin-bottom:1.5rem}
+.tab{flex:1;padding:10px 8px;font-size:13px;font-weight:500;text-align:center;border-radius:11px;cursor:pointer;color:var(--muted);transition:all .2s;border:none;background:none;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab i{font-size:15px}
+.tab.active{background:var(--surface3);color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.tab:hover:not(.active){color:var(--text);background:rgba(255,255,255,.03)}
+.panel{display:none;animation:fadeUp .25s ease}.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
+.card-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:.75rem}
+.search-row{display:flex;gap:8px;margin-bottom:1rem}
+.search-field{flex:1;position:relative}
+.search-field input{width:100%;background:var(--surface2);border:.5px solid var(--border2);border-radius:12px;padding:13px 16px 13px 44px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .2s}
+.search-field input::placeholder{color:var(--muted)}
+.search-field input:focus{outline:none;border-color:var(--purple)}
+.search-field i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px;pointer-events:none}
+.btn-search{background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:12px;padding:0 20px;font-size:13px;font-weight:600;color:white;cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:opacity .2s;height:48px}
+.btn-search:hover{opacity:.9}
+.btn-search:disabled{background:var(--surface3);color:var(--muted);cursor:not-allowed}
+.song-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto;margin-bottom:1rem}
+.song-list::-webkit-scrollbar{width:3px}
+.song-list::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
+.song-item{background:var(--surface2);border:.5px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
+.song-item:hover{border-color:rgba(124,111,224,.4);background:var(--surface3)}
+.song-emoji{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,rgba(124,111,224,.2),rgba(212,83,126,.2));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.song-meta{flex:1;min-width:0}
+.song-name{font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-artist{font-size:12px;color:var(--muted);margin-top:2px}
+.song-pick{font-size:12px;color:var(--purple-light);display:flex;align-items:center;gap:4px}
+.selected-banner{display:flex;align-items:center;gap:12px;background:rgba(124,111,224,.08);border:.5px solid rgba(124,111,224,.25);border-radius:12px;padding:12px 14px;margin-bottom:1rem}
+.selected-banner .info{flex:1;min-width:0}
+.sname{font-weight:500;font-size:14px}
+.sartist{font-size:12px;color:var(--muted);margin-top:1px}
+.clear-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;line-height:1}
+.clear-btn:hover{color:var(--text)}
+.lyrics-box{background:var(--surface2);border:.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;max-height:220px;overflow-y:auto;font-size:13px;line-height:2;color:var(--text);white-space:pre-wrap}
+.lyrics-box::-webkit-scrollbar{width:3px}
+.lyrics-box::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
+textarea.lyrics-box{border:none;background:transparent;width:100%;resize:vertical;min-height:140px;font-family:'DM Sans',sans-serif;outline:none;color:var(--text)}
+textarea.lyrics-box::placeholder{color:var(--muted)}
+.lang-row{display:grid;grid-template-columns:1fr 38px 1fr;gap:8px;align-items:end;margin-bottom:1rem}
+.lang-group label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+select{width:100%;background:var(--surface2);border:.5px solid var(--border2);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer}
+select:focus{outline:none;border-color:var(--purple)}
+.swap-btn{width:36px;height:36px;border-radius:10px;background:var(--surface2);border:.5px solid var(--border2);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:all .2s}
+.swap-btn:hover{border-color:var(--purple);color:var(--purple-light)}
+.btn-main{width:100%;padding:14px;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:'Syne',sans-serif}
+.btn-main:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,111,224,.25)}
+.btn-main:disabled{background:var(--surface3);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none}
+.loading-row{display:none;align-items:center;gap:10px;padding:.75rem 0;color:var(--muted);font-size:13px}
+.loading-row.show{display:flex}
+.dots{display:flex;gap:4px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--purple);animation:bop 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes bop{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1.1);opacity:1}}
+.err-box{display:none;background:rgba(231,76,110,.08);border:.5px solid rgba(231,76,110,.25);border-radius:10px;padding:.75rem 1rem;font-size:13px;color:#E87DAD;margin:.75rem 0}
+.err-box.show{display:block}
+.result-wrap{display:none;margin-top:1rem;animation:fadeUp .3s ease}
+.result-wrap.show{display:block}
+.result-card{background:linear-gradient(135deg,rgba(124,111,224,.06),rgba(212,83,126,.06));border:.5px solid rgba(124,111,224,.25);border-radius:16px;padding:1.25rem}
+.result-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.result-langs{display:flex;align-items:center;gap:8px}
+.lang-pill{background:rgba(124,111,224,.15);color:var(--purple-light);padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}
+.copy-btn{background:var(--surface2);border:.5px solid var(--border2);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;transition:all .2s}
+.copy-btn:hover{color:var(--text);border-color:var(--purple)}
+.result-text{font-size:13px;line-height:2;color:var(--text);white-space:pre-wrap}
+.video-drop{border:1.5px dashed var(--border2);border-radius:16px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;margin-bottom:1rem}
+.video-drop:hover,.video-drop.drag{border-color:var(--purple);background:rgba(124,111,224,.04)}
+.video-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:40px;color:var(--purple);margin-bottom:10px;display:block}
+.drop-title{font-weight:600;font-size:15px;margin-bottom:4px;font-family:'Syne',sans-serif}
+.drop-sub{font-size:12px;color:var(--muted)}
+.drop-formats{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.fmt{background:var(--surface2);border:.5px solid var(--border);border-radius:6px;padding:3px 8px;font-size:11px;color:var(--muted)}
+#video-el{width:100%;border-radius:12px;margin-bottom:1rem;max-height:220px;display:none}
+.info-box{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
+.info-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:.5rem}
+.info-text{font-size:12px;color:var(--muted);line-height:1.7}
+footer{position:relative;z-index:1;border-top:.5px solid var(--border);padding:2rem;text-align:center;font-size:12px;color:var(--muted)}
+footer em{color:var(--purple-light);font-style:normal}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--faint);border-radius:4px}
+@media(max-width:600px){nav{padding:0 1rem}.hero{padding:3rem 1rem 2rem}.container{padding:0 1rem 4rem}.lang-row{grid-template-columns:1fr 34px 1fr;gap:5px}}
+</style>
+<body>
+<nav>
+  <a class="nav-logo" href="#"><div class="nav-logo-icon"><i class="ti ti-music"></i></div><span class="nav-logo-text">LyricTranslate</span></a>
+  <span class="nav-badge">AI powered</span>
+</nav>
+<div class="hero">
+  <div class="hero-eyebrow"><span></span> Jonli ishlaydi</div>
+  <h1>Qo'shiqlar <em>tarjimoni</em></h1>
+  <p>Qo'shiq nomi yozing, matnini yuklab oling va 12+ tilga AI bilan tarjima qiling</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Til</div></div>
+    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Powered</div></div>
+    <div class="stat"><div class="stat-num">&#8734;</div><div class="stat-label">Qo'shiqlar</div></div>
+  </div>
+</div>
+<div class="container">
+  <div class="tabs-wrap">
+    <button class="tab active" onclick="switchTab('search')"><i class="ti ti-search"></i> Qo'shiq qidir</button>
+    <button class="tab" onclick="switchTab('manual')"><i class="ti ti-text-size"></i> Matn kiriting</button>
+    <button class="tab" onclick="switchTab('video')"><i class="ti ti-video"></i> Video tarjima</button>
+  </div>
+  <div class="panel active" id="panel-search">
+    <div class="card">
+      <div class="card-label"><i class="ti ti-music"></i> Qo'shiq nomi</div>
+      <div class="search-row">
+        <div class="search-field">
+          <i class="ti ti-search"></i>
+          <input type="text" id="song-input" placeholder="Masalan: Adele Hello, BTS Dynamite, Coldplay Yellow..." onkeydown="if(event.key==='Enter')searchSong()">
+        </div>
+        <button class="btn-search" id="btn-search" onclick="searchSong()"><i class="ti ti-search"></i> Qidir</button>
+      </div>
+      <div class="loading-row" id="search-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Qidirilmoqda...</div>
+      <div class="err-box" id="search-err"></div>
+      <div class="song-list" id="song-list" style="display:none"></div>
+    </div>
+    <div id="selected-area" style="display:none">
+      <div class="selected-banner">
+        <div class="song-emoji" id="sel-emoji"></div>
+        <div class="info"><div class="sname" id="sel-name"></div><div class="sartist" id="sel-artist"></div></div>
+        <button class="clear-btn" onclick="clearSelection()"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="card">
+        <div class="card-label"><i class="ti ti-file-text"></i> Qo'shiq matni</div>
+        <div class="lyrics-box" id="search-lyrics"></div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-group"><label>Asl til</label>
+          <select id="s-from"><option value="auto">Avtomatik</option><option value="English" selected>Inglizcha</option><option value="Russian">Ruscha</option><option value="Korean">Koreyscha</option><option value="Spanish">Ispancha</option><option value="French">Fransuzcha</option><option value="Arabic">Arabcha</option><option value="Turkish">Turkcha</option><option value="Japanese">Yaponcha</option><option value="Uzbek">O'zbekcha</option></select>
+        </div>
+        <button class="swap-btn" onclick="swapLangs('s-from','s-to')"><i class="ti ti-switch-horizontal"></i></button>
+        <div class="lang-group"><label>Tarjima tili</label>
+          <select id="s-to"><option value="Uzbek" selected>O'zbekcha</option><option value="Russian">Ruscha</option><option value="English">Inglizcha</option><option value="Korean">Koreyscha</option><option value="Spanish">Ispancha</option><option value="French">Fransuzcha</option><option value="Arabic">Arabcha</option><option value="Turkish">Turkcha</option><option value="Japanese">Yaponcha</option></select>
+        </div>
+      </div>
+      <button class="btn-main" id="s-btn" onclick="doTranslate('s')"><i class="ti ti-language"></i> Tarjima qilish</button>
+      <div class="loading-row" id="s-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Tarjima qilinmoqda...</div>
+      <div class="err-box" id="s-err"></div>
+      <div class="result-wrap" id="s-result"></div>
+    </div>
+  </div>
+  <div class="panel" id="panel-manual">
+    <div class="card">
+      <div class="card-label"><i class="ti ti-text-size"></i> Qo'shiq matni</div>
+      <textarea class="lyrics-box" id="manual-text" placeholder="Bu yerga qo'shiq so'zlarini yozing...&#10;&#10;Masalan:&#10;Hello, it's me&#10;I was wondering if after all these years..."></textarea>
+    </div>
+    <div class="lang-row">
+      <div class="lang-group"><label>Asl til</label>
+        <select id="m-from">
+          <option value="auto" selected>Avtomatik</option>
+          <option value="English">Inglizcha</option>
+          <option value="Russian">Ruscha</option>
+          <option value="Korean">Koreyscha</option>
+          <option value="Spanish">Ispancha</option>
+          <option value="French">Fransuzcha</option>
+          <option value="Arabic">Arabcha</option>
+          <option value="Turkish">Turkcha</option>
+          <option value="Japanese">Yaponcha</option>
+          <option value="Uzbek">O'zbekcha</option>
+        </select>
+      </div>
+      <button class="swap-btn" onclick="swapLangs('m-from','m-to')"><i class="ti ti-switch-horizontal"></i></button>
+      <div class="lang-group"><label>Tarjima tili</label>
+        <select id="m-to">
+          <option value="Uzbek" selected>O'zbekcha</option>
+          <option value="Russian">Ruscha</option>
+          <option value="English">Inglizcha</option>
+          <option value="Korean">Koreyscha</option>
+          <option value="Spanish">Ispancha</option>
+          <option value="French">Fransuzcha</option>
+          <option value="Arabic">Arabcha</option>
+          <option value="Turkish">Turkcha</option>
+          <option value="Japanese">Yaponcha</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-main" id="m-btn" onclick="doTranslate('m')"><i class="ti ti-language"></i> Tarjima qilish</button>
+    <div class="loading-row" id="m-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Tarjima qilinmoqda...</div>
+    <div class="err-box" id="m-err"></div>
+    <div class="result-wrap" id="m-result"></div>
+  </div>
+
+  <div class="panel" id="panel-video">
+    <div class="video-drop" id="video-drop"
+      ondragover="event.preventDefault();this.classList.add('drag')"
+      ondragleave="this.classList.remove('drag')"
+      ondrop="handleDrop(event)">
+      <input type="file" accept="video/*,audio/*" onchange="handleFile(this.files[0])">
+      <i class="ti ti-cloud-upload drop-icon"></i>
+      <div class="drop-title">Video yoki audio yuklang</div>
+      <div class="drop-sub">Bosing yoki faylni bu yerga torting</div>
+      <div class="drop-formats">
+        <span class="fmt">MP4</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MP3</span><span class="fmt">WAV</span>
+      </div>
+    </div>
+    <video id="video-el" controls></video>
+    <div id="video-area" style="display:none">
+      <div class="card">
+        <div class="card-label"><i class="ti ti-file-text"></i> Matn (qo'lda ham kiritsa bo'ladi)</div>
+        <textarea class="lyrics-box" id="video-text" placeholder="Video yuklanganidan so'ng matnni shu yerga yozing yoki qo'lda kiriting..."></textarea>
+      </div>
+      <div class="lang-row">
+        <div class="lang-group"><label>Asl til</label>
+          <select id="v-from">
+            <option value="auto" selected>Avtomatik</option>
+            <option value="English">Inglizcha</option>
+            <option value="Russian">Ruscha</option>
+            <option value="Korean">Koreyscha</option>
+            <option value="Turkish">Turkcha</option>
+            <option value="Uzbek">O'zbekcha</option>
+          </select>
+        </div>
+        <button class="swap-btn" onclick="swapLangs('v-from','v-to')"><i class="ti ti-switch-horizontal"></i></button>
+        <div class="lang-group"><label>Tarjima tili</label>
+          <select id="v-to">
+            <option value="Uzbek" selected>O'zbekcha</option>
+            <option value="Russian">Ruscha</option>
+            <option value="English">Inglizcha</option>
+            <option value="Korean">Koreyscha</option>
+            <option value="Turkish">Turkcha</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-main" id="v-btn" onclick="doTranslate('v')"><i class="ti ti-language"></i> Tarjima qilish</button>
+      <div class="loading-row" id="v-loading"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>&nbsp;Tarjima qilinmoqda...</div>
+      <div class="err-box" id="v-err"></div>
+      <div class="result-wrap" id="v-result"></div>
+    </div>
+    <div class="info-box">
+      <div class="info-title"><i class="ti ti-info-circle"></i> Eslatma</div>
+      <div class="info-text">Video yoki audio faylni yuklang, matnni qo'lda kiriting va istalgan tilga AI tarjima qiladi. She'riy ohang saqlanadi.</div>
+    </div>
+  </div>
+</div>
+<footer>Tayyorladi <em>LyricTranslate</em> &middot; Anthropic Claude AI bilan ishlaydi</footer>
+<script>
+const SONGS = [
+  { id:1, title:"Hello", artist:"Adele", emoji:"🎤",
+    lyrics:"Hello, it's me\nI was wondering if after all these years you'd like to meet\nTo go over everything\nThey say that time's supposed to heal ya\nBut I ain't done much healing\n\nHello, can you hear me?\nI'm in California dreaming about who we used to be\nWhen we were younger and free\nI've forgotten how it felt before the world fell at our feet\n\nThere's such a difference between us\nAnd a million miles\n\nHello from the other side\nI must have called a thousand times\nTo tell you I'm sorry for everything that I've done\nBut when I call you never seem to be home" },
+  { id:2, title:"Dynamite", artist:"BTS", emoji:"💜",
+    lyrics:"Cause I, I, I'm in the stars tonight\nSo watch me bring the fire and set the night alight\nShining through the city with a little funk and soul\nSo I'ma light it up like dynamite\n\nDyno-mite, mite, mite\nDyno-mite, mite, mite\nDyno, dyno-mite, mite, mite\nDyno-mite, mite, mite\n\nI'm diamond, you know I glow up\nHey, so let's go" },
+  { id:3, title:"Yellow", artist:"Coldplay", emoji:"🌟",
+    lyrics:"Look at the stars\nLook how they shine for you\nAnd everything you do\nYeah, they were all yellow\n\nI came along\nI wrote a song for you\nAnd all the things you do\nAnd it was called Yellow\n\nSo then I took my turn\nOh, what a thing to have done\nAnd it was all yellow" },
+  { id:4, title:"Shape of You", artist:"Ed Sheeran", emoji:"🎸",
+    lyrics:"The club isn't the best place to find a lover\nSo the bar is where I go\nMe and my friends at the table doing shots\nDrinking fast and then we talk slow\n\nCome over and start up a conversation with just me\nAnd trust me I'll give it a chance now\nTake my hand, stop, put Van the Man on the jukebox\nAnd then we start to dance\n\nI'm in love with the shape of you\nWe push and pull like a magnet do" },
+  { id:5, title:"Blinding Lights", artist:"The Weeknd", emoji:"🌃",
+    lyrics:"I've been trying to call\nI've been on my own for long enough\nMaybe you can show me how to love, maybe\n\nI'm going through withdrawals\nYou don't even have to do too much\nYou can turn me on with just a touch, baby\n\nI look around and sin city's cold and empty\nNo one's around to judge me\nI can't see clearly when you're gone\n\nI said, ooh, I'm blinded by the lights\nNo, I can't sleep until I feel your touch" },
+  { id:6, title:"Payphone", artist:"Maroon 5", emoji:"📞",
+    lyrics:"I'm at a payphone trying to call home\nAll of my change I spent on you\nWhere have the times gone, baby it's all wrong\nWhere are the plans we made for two?\n\nYeah, I, I know it's hard to remember\nThe people we used to be\nIt's even harder to picture\nThat you're not here next to me" }
+];
+let currentSong = null;
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ['search','manual','video'][i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function searchSong() {
+  const q = document.getElementById('song-input').value.trim().toLowerCase();
+  const listEl = document.getElementById('song-list');
+  const errEl = document.getElementById('search-err');
+  const loadEl = document.getElementById('search-loading');
+  const btn = document.getElementById('btn-search');
+  if (!q) { showErr(errEl, "Iltimos, qo'shiq nomini kiriting."); return; }
+  errEl.classList.remove('show');
+  listEl.style.display = 'none';
+  listEl.innerHTML = '';
+  loadEl.classList.add('show');
+  btn.disabled = true;
+  setTimeout(() => {
+    loadEl.classList.remove('show');
+    btn.disabled = false;
+    const results = SONGS.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.artist.toLowerCase().includes(q)
+    );
+    if (results.length === 0) {
+      showErr(errEl, "Qo'shiq topilmadi. Boshqa nom yoki artist kiriting.");
+      return;
+    }
+    results.forEach(song => {
+      const div = document.createElement('div');
+      div.className = 'song-item';
+      div.innerHTML = `
+        <div class="song-emoji">${song.emoji}</div>
+        <div class="song-meta">
+          <div class="song-name">${song.title}</div>
+          <div class="song-artist">${song.artist}</div>
+        </div>
+        <div class="song-pick"><i class="ti ti-chevron-right"></i> Tanlash</div>
+      `;
+      div.onclick = () => selectSong(song);
+      listEl.appendChild(div);
+    });
+    listEl.style.display = 'flex';
+  }, 800);
+}
+
+function selectSong(song) {
+  currentSong = song;
+  document.getElementById('song-list').style.display = 'none';
+  document.getElementById('sel-emoji').textContent = song.emoji;
+  document.getElementById('sel-name').textContent = song.title;
+  document.getElementById('sel-artist').textContent = song.artist;
+  document.getElementById('search-lyrics').textContent = song.lyrics;
+  document.getElementById('selected-area').style.display = 'block';
+  document.getElementById('s-result').classList.remove('show');
+  document.getElementById('s-result').innerHTML = '';
+}
+
+function clearSelection() {
+  currentSong = null;
+  document.getElementById('selected-area').style.display = 'none';
+  document.getElementById('song-input').value = '';
+  document.getElementById('s-result').classList.remove('show');
+}
+
+function swapLangs(fromId, toId) {
+  const a = document.getElementById(fromId);
+  const b = document.getElementById(toId);
+  const tmp = a.value;
+  a.value = b.value;
+  b.value = tmp;
+}
+
+function showErr(el, msg) {
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function showResult(wrapId, fromLang, toLang, text) {
+  const wrap = document.getElementById(wrapId);
+  wrap.innerHTML = `
+    <div class="result-card">
+      <div class="result-top">
+        <div class="result-langs">
+          <span class="lang-pill">${fromLang}</span>
+          <span style="color:var(--muted);font-size:13px">&#8594;</span>
+          <span class="lang-pill">${toLang}</span>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, \`${text.replace(/`/g,'\\`')}\`)">
+          <i class="ti ti-copy"></i> Nusxa
+        </button>
+      </div>
+      <div class="result-text">${text.replace(/</g,'&lt;')}</div>
+    </div>`;
+  wrap.classList.add('show');
+}
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.innerHTML = '<i class="ti ti-check"></i> Nusxalandi!';
+    setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy"></i> Nusxa'; }, 2000);
+  });
+}
+async function doTranslate(prefix) {
+  const btn = document.getElementById(prefix + '-btn');
+  const loadEl = document.getElementById(prefix + '-loading');
+  const errEl = document.getElementById(prefix + '-err');
+  const resultId = prefix + '-result';
+  errEl.classList.remove('show');
+
+  let text = '';
+  let fromLang = '', toLang = '';
+
+  if (prefix === 's') {
+    text = document.getElementById('search-lyrics').textContent.trim();
+    fromLang = document.getElementById('s-from').value;
+    toLang = document.getElementById('s-to').value;
+  } else if (prefix === 'm') {
+    text = document.getElementById('manual-text').value.trim();
+    fromLang = document.getElementById('m-from').value;
+    toLang = document.getElementById('m-to').value;
+  } else if (prefix === 'v') {
+    text = document.getElementById('video-text').value.trim();
+    fromLang = document.getElementById('v-from').value;
+    toLang = document.getElementById('v-to').value;
+  }
+
+  if (!text) { showErr(errEl, "Tarjima qilish uchun matn yo'q."); return; }
+  if (fromLang !== 'auto' && fromLang === toLang) { showErr(errEl, "Asl til va tarjima tili bir xil bo'lmasin."); return; }
+
+  btn.disabled = true;
+  loadEl.classList.add('show');
+  document.getElementById(resultId).classList.remove('show');
+
+  const fromLabel = fromLang === 'auto' ? 'Avtomatik' : fromLang;
+  const prompt = `Sen professional qo'shiq matni tarjimonisan. Quyidagi matni ${fromLang === 'auto' ? 'asl tilini o\'zing aniqlab' : fromLang + ' tilidan'} ${toLang} tiliga tarjima qil.
+
+Qoidalar:
+- Har bir qatorni alohida tarjima qil
+- She'riy ohang va hissiyotni saqla
+- Faqat tarjima matnini ber, boshqa hech narsa yozma
+
+Matn:
+${text}`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    const translated = data.content.map(b => b.text || '').join('');
+    showResult(resultId, fromLabel, toLang, translated);
+  } catch(e) {
+    showErr(errEl, "Xatolik yuz berdi: " + e.message);
+  } finally {
+    btn.disabled = false;
+    loadEl.classList.remove('show');
+  }
+}
+
+function handleFile(file) {
+  if (!file) return;
+  const videoEl = document.getElementById('video-el');
+  const area = document.getElementById('video-area');
+  const drop = document.getElementById('video-drop');
+  const url = URL.createObjectURL(file);
+  if (file.type.startsWith('video/')) {
+    videoEl.src = url;
+    videoEl.style.display = 'block';
+  } else {
+    videoEl.style.display = 'none';
+  }
+  drop.style.display = 'none';
+  area.style.display = 'block';
+  document.getElementById('video-text').placeholder = "Video yuklandia! Qo'shiq matnini bu yerga yozing...";
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('video-drop').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFile(file);
+}
+</script>
+</body>
+</html>
